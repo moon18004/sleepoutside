@@ -30,7 +30,7 @@ function getProductsData() {
 // add to cart button event handler
 function addToCart(e) {
   let items = getLocalStorage("so-cart");
-  if (items == undefined){
+  if (items === null){
     items =[];
   }
   
