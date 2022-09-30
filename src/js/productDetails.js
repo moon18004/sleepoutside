@@ -1,4 +1,4 @@
-import { setLocalStorage } from "./utils";
+import { setLocalStorage } from "./utils.js";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
