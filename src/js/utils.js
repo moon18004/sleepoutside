@@ -35,5 +35,4 @@ export function animateBackpack() {
   setTimeout(() => {
     cartImg.classList.remove("anim-out");
   }, 300);
-  
 }
