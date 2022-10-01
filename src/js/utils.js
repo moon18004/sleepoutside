@@ -28,3 +28,12 @@ export function getParam(param) {
   const value = urlParams.get(param);
   return value;
 }
+
+export function animateBackpack() {
+  var cartImg = document.querySelector(".cart");
+  cartImg.classList.add("anim-out");
+  setTimeout(() => {
+    cartImg.classList.remove("anim-out");
+  }, 300);
+  
+}

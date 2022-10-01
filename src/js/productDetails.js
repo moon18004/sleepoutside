@@ -1,4 +1,4 @@
-import { setLocalStorage } from "./utils";
+import { setLocalStorage, animateBackpack } from "./utils";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -32,6 +32,7 @@ export default class ProductDetails {
 
     // Save it to local storage.
     setLocalStorage("so-cart", cart_items);
+    animateBackpack();
 
     // This is code for a version that would add a count to each item in the cart.
     // This would stop multiple copies of the same data being added to local storage.
