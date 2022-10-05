@@ -26,7 +26,7 @@ function eventListener(element, callback) {
 function removeItem(id) {
   let cartItems = getLocalStorage("so-cart");
   console.log(cartItems);
-  console.log(id)
+  console.log(id);
   // Figure out how to get the id in here
   // Find the item in the cart
   let itemId = -1;
@@ -52,7 +52,9 @@ function removeItem(id) {
   getCartContents()
   const removeButtons = [... document.querySelectorAll(".cart-card__remove-item")]
   removeButtons.forEach(function (item, idx) {
-        item.addEventListener('click', removeItem.bind(item.dataset.id))});
+        item.addEventListener('click', (e) => {
+          removeItem(item.dataset.id, item.closest('li'))}
+          )});
 }
 
 function renderCartItem(item) {
@@ -81,5 +83,7 @@ getCartContents();
 
 const removeButtons = [... document.querySelectorAll(".cart-card__remove-item")]
 removeButtons.forEach(function (item, idx) {
-        item.addEventListener('click', removeItem.bind(item.dataset.id))});
+        item.addEventListener('click', (e) => {
+          removeItem(item.dataset.id, item.closest('li'))}
+          )});
 removeButtons.map(element => eventListener(element, removeItem.bind(element.dataset.id)))
