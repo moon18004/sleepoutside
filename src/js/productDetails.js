@@ -1,4 +1,9 @@
-import { setLocalStorage, animateBackpack } from "./utils";
+import {
+  setLocalStorage,
+  animateBackpack,
+  getLocalStorage,
+  updateCartNumber,
+} from "./utils";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -13,6 +18,8 @@ export default class ProductDetails {
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addToCart.bind(this));
+    let length = getLocalStorage("so-cart").length;
+    document.querySelector(".count").innerHTML = length;
   }
 
   addToCart() {
@@ -32,6 +39,7 @@ export default class ProductDetails {
 
     // Save it to local storage.
     setLocalStorage("so-cart", cart_items);
+    updateCartNumber();
     animateBackpack();
 
     // This is code for a version that would add a count to each item in the cart.
