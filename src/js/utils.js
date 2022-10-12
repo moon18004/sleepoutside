@@ -49,3 +49,7 @@ export function renderList(list, id, hydrateFunction, ul) {
     ul.appendChild(hybratedTemplate);
   });
 }
+export function updateCartNumber() {
+  let length = getLocalStorage("so-cart").length;
+  document.querySelector(".count").innerHTML = length;
+}
