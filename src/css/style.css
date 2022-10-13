@@ -168,6 +168,14 @@ button {
   margin: 0.5em 0;
 }
 
+.product-card__price > strike {
+  color: gray
+}
+
+.product-card__price > span {
+  color: red
+}
+
 .card__brand {
   font-size: var(--small-font);
 }

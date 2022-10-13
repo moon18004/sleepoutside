@@ -68,12 +68,27 @@ export default class ProductDetails {
           src="${this.product.Image}"
           alt="${this.product.Name}"
         />
-
+        <p class="product-card__discount"></p>
         <p class="product-card__price">$${this.product.ListPrice}</p>
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
           <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
         </div>`;
+    
+    // If there is a dicount, add it to the page.
+    if (this.product.SuggestedRetailPrice > this.product.ListPrice) {
+      // Percentage Discount
+      this.percentOff = Math.round(100 * (this.product.SuggestedRetailPrice - this.product.ListPrice) / this.product.SuggestedRetailPrice)
+      document.querySelector(
+        ".product-card__discount"
+        ).innerHTML = `<span>${this.percentOff}% Off<span>`
+      }
+      // Show discounted price
+      document.querySelector(
+        ".product-card__price"
+      ).innerHTML = `<strike>Retail $${parseFloat(this.product.SuggestedRetailPrice).toFixed(2)}</strike> <span>Retail $${this.product.ListPrice}</span>`
+      // <strike>$${parseFloat(this.product.SuggestedRetailPrice).toFixed(2)}</strike>
   }
+  
 }
