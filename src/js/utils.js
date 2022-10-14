@@ -53,3 +53,36 @@ export function updateCartNumber() {
   let length = getLocalStorage("so-cart").length;
   document.querySelector(".count").innerHTML = length;
 }
+
+
+export function renderwithTemplate(parent_node, template, data, callback) {
+  let copy = template.content.cloneNode(true)
+
+  if(callback){
+     copy = callback(copy, data);
+  }
+  
+  parent_node.appendChild(copy);
+
+}
+
+export async function loadTemplate(path){
+  const data = await fetch(path);
+  const template = await data.text();
+
+  const newTemplate = document.createElement("template");
+  newTemplate.innerHTML = template;
+
+  return newTemplate;
+}
+
+export async function loadHeaderFooter(){
+  const footer = await loadTemplate("../partials/footer.html");
+  const header = await loadTemplate("../partials/header.html");
+
+  const head = document.querySelector("header");
+  const foot = document.querySelector("footer");
+
+  renderwithTemplate(head , header);
+  renderwithTemplate(foot , footer);
+}
