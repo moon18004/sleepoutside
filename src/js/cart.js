@@ -16,7 +16,26 @@ function getCartContents() {
         "<h3>There are no items in your cart.</h3>")
     : (document.querySelector(".product-list").innerHTML = htmlItems.join(""));
   updateCartNumber();
+  getAndRenderTotal();
 }
+
+// function getAndRenderTotal(){
+//  var cartItems = JSON.parse(localStorage.getItem("so-cart"));
+//  var listPrices = cartItems.ListPrice;
+//  var total = 0;
+
+//  total += listPrices;
+
+//  for (const item of cartItems) {
+//   total += listPrices;
+//  }
+//  console.log(total)
+
+//  // rendering
+//  document.querySelector(".cart-total").innerHTML = total
+
+
+// };
 
 function eventListener(element, callback) {
   element.addEventListener("touchend", (event) => {
