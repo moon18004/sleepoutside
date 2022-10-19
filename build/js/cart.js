@@ -1,81 +1,123 @@
 import {
-  getLocalStorage as i,
-  setLocalStorage as u,
-  updateCartNumber as s,
+  getLocalStorage,
+  setLocalStorage,
+  updateCartNumber,
+  loadHeaderFooter,
 } from "./utils.js";
-function n() {
-  let e = "",
-    t;
+
+await loadHeaderFooter();
+
+function getCartContents() {
+  let markup = "";
+  let cartItems;
   try {
-    (t = JSON.parse(localStorage.getItem("so-cart")) || []),
-      Array.isArray(t) || (t = [t]);
-  } catch (c) {
-    t = [];
+    cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+    if (!Array.isArray(cartItems)) cartItems = [cartItems];
+  } catch (err) {
+    cartItems = [];
   }
-  console.log(t);
-  const r = t.map((c) => p(c));
-  t.length == 0
+  console.log(cartItems);
+  const htmlItems = cartItems.map((item) => renderCartItem(item));
+  cartItems.length == 0
     ? (document.querySelector(".product-list").innerHTML =
         "<h3>There are no items in your cart.</h3>")
-    : (document.querySelector(".product-list").innerHTML = r.join("")),
-    s();
+    : (document.querySelector(".product-list").innerHTML = htmlItems.join(""));
+  updateCartNumber();
+  // getAndRenderTotal();
 }
-function m(e, t) {
-  e.addEventListener("touchend", (r) => {
-    r.preventDefault(), t();
-  }),
-    e.addEventListener("click", t);
+
+// function getAndRenderTotal(){
+//  var cartItems = JSON.parse(localStorage.getItem("so-cart"));
+//  var listPrices = cartItems.ListPrice;
+//  var total = 0;
+
+//  total += listPrices;
+
+//  for (const item of cartItems) {
+//   total += listPrices;
+//  }
+//  console.log(total)
+
+//  // rendering
+//  document.querySelector(".cart-total").innerHTML = total
+
+// };
+
+function eventListener(element, callback) {
+  element.addEventListener("touchend", (event) => {
+    event.preventDefault();
+    callback();
+  });
+  element.addEventListener("click", callback);
 }
-function o(e) {
-  let t = i("so-cart");
-  console.log(t), console.log(e);
-  let r = -1;
-  for (var c = 0; c < t.length; c++)
-    if (t[c].Id == e) {
-      r = c;
+
+function removeItem(id) {
+  let cartItems = getLocalStorage("so-cart");
+  console.log(cartItems);
+  console.log(id);
+  // Figure out how to get the id in here
+  // Find the item in the cart
+  let itemId = -1;
+  for (var i = 0; i < cartItems.length; i++) {
+    if (cartItems[i].Id == id) {
+      itemId = i;
       break;
     }
-  console.log(r),
-    r < 0
-      ? console.log("ERROR: ID does not exist in the cart.")
-      : t.splice(r, 1),
-    u("so-cart", t),
-    (document.querySelector(".product-list").innerHTML = ""),
-    n();
-  const d = [...document.querySelectorAll(".cart-card__remove-item")];
-  d.forEach(function (a, g) {
-    a.addEventListener("click", (v) => {
-      o(a.dataset.id, a.closest("li"));
+  }
+  console.log(itemId);
+
+  // Remove the item
+  if (itemId < 0) {
+    console.log("ERROR: ID does not exist in the cart.");
+  } else {
+    cartItems.splice(itemId, 1);
+  }
+  setLocalStorage("so-cart", cartItems);
+
+  // Reload the cart
+  document.querySelector(".product-list").innerHTML = "";
+  getCartContents();
+  const removeButtons = [
+    ...document.querySelectorAll(".cart-card__remove-item"),
+  ];
+  removeButtons.forEach(function (item, idx) {
+    item.addEventListener("click", (e) => {
+      removeItem(item.dataset.id, item.closest("li"));
     });
-  }),
-    s();
+  });
+  updateCartNumber();
 }
-function p(e) {
-  const t = `<li class="cart-card divider">
-  <a href="product_pages/product-details.html?product=${e.Id}" class="cart-card__image">
+
+function renderCartItem(item) {
+  const newItem = `<li class="cart-card divider">
+  <a href="product_pages/product-details.html?product=${item.Id}" class="cart-card__image">
   <img
-  src="${e.Image}"
-  alt="${e.Name}"
+  src="${item.Image}"
+  alt="${item.Name}"
   />
   </a>
   <a href="#">
-  <h2 class="card__name">${e.Name}</h2>
+  <h2 class="card__name">${item.Name}</h2>
   </a>
-  <p class="cart-card__color">${e.Colors[0].ColorName}</p>
+  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${e.FinalPrice}</p>
-  <div class="cart-card__remove-item" data-id="${e.Id}">
+  <p class="cart-card__price">$${item.FinalPrice}</p>
+  <div class="cart-card__remove-item" data-id="${item.Id}">
     <p>X</p>
     <p>Remove Item</p>
   </div>
 </li>`;
-  return t;
+  return newItem;
 }
-n();
-const l = [...document.querySelectorAll(".cart-card__remove-item")];
-l.forEach(function (e, t) {
-  e.addEventListener("click", (r) => {
-    o(e.dataset.id, e.closest("li"));
+
+getCartContents();
+
+const removeButtons = [...document.querySelectorAll(".cart-card__remove-item")];
+removeButtons.forEach(function (item, idx) {
+  item.addEventListener("click", (e) => {
+    removeItem(item.dataset.id, item.closest("li"));
   });
-}),
-  l.map((e) => m(e, o.bind(e.dataset.id)));
+});
+removeButtons.map((element) =>
+  eventListener(element, removeItem.bind(element.dataset.id))
+);

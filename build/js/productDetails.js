@@ -1,53 +1,66 @@
-var i = (o, t, r) =>
-  new Promise((s, e) => {
-    var u = (d) => {
-        try {
-          a(r.next(d));
-        } catch (c) {
-          e(c);
-        }
-      },
-      p = (d) => {
-        try {
-          a(r.throw(d));
-        } catch (c) {
-          e(c);
-        }
-      },
-      a = (d) => (d.done ? s(d.value) : Promise.resolve(d.value).then(u, p));
-    a((r = r.apply(o, t)).next());
-  });
 import {
-  setLocalStorage as l,
-  animateBackpack as h,
-  getLocalStorage as n,
-  updateCartNumber as m,
+  setLocalStorage,
+  animateBackpack,
+  getLocalStorage,
+  updateCartNumber,
+  loadHeaderFooter,
 } from "./utils.js";
-export default class g {
-  constructor(t, r) {
-    (this.productId = t), (this.product = {}), (this.dataSource = r);
+
+export default class ProductDetails {
+  constructor(productId, dataSource) {
+    this.productId = productId;
+    this.product = {};
+    this.dataSource = dataSource;
   }
-  init() {
-    return i(this, null, function* () {
-      (this.product = yield this.dataSource.findProductById(this.productId)),
-        this.renderProductDetails(),
-        document
-          .getElementById("addToCart")
-          .addEventListener("click", this.addToCart.bind(this));
-      let t = n("so-cart").length;
-      document.querySelector(".count").innerHTML = t;
-    });
+
+  async init() {
+    this.product = await this.dataSource.findProductById(this.productId);
+    this.renderProductDetails();
+    document
+      .getElementById("addToCart")
+      .addEventListener("click", this.addToCart.bind(this));
+    // let length = getLocalStorage("so-cart").length;
+    // document.querySelector(".count").innerHTML = length;
+    await loadHeaderFooter();
+    updateCartNumber();
   }
+
   addToCart() {
-    let t;
+    // Don't break, don't break, don't break, don't break, don't break, don't break, don't break, don't break, don't break.
+    let cart_items;
     try {
-      (t = JSON.parse(localStorage.getItem("so-cart")) || []),
-        Array.isArray(t) || (t = [t]);
-    } catch (r) {
-      t = [];
+      cart_items = JSON.parse(localStorage.getItem("so-cart")) || [];
+      if (!Array.isArray(cart_items)) cart_items = [cart_items];
+    } catch (err) {
+      cart_items = [];
     }
-    t.push(this.product), l("so-cart", t), m(), h();
+
+    // if (!product?.count) product.count = 1;
+
+    // Add the item to the list.
+    cart_items.push(this.product);
+
+    // Save it to local storage.
+    setLocalStorage("so-cart", cart_items);
+    updateCartNumber();
+    animateBackpack();
+
+    // This is code for a version that would add a count to each item in the cart.
+    // This would stop multiple copies of the same data being added to local storage.
+    //
+    // if the tent is already in the cart, increment the count instead of adding a new object to the array
+    // let matched_item;
+    // for (let item_index = 0; item_index < cart_items.length; item_index++) {
+    //   let item = cart_items[item_index];
+    //   if (item.id == product.id) matched_item = item_index;
+    // }
+    // if (matched_item) {
+    //   cart_items[matched_item].count = cart_items[matched_item].count + 1;
+    // } else {
+    //   cart_items.push(product);
+    // }
   }
+
   renderProductDetails() {
     document.querySelector(
       ".product-detail"

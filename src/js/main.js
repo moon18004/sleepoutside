@@ -6,6 +6,4 @@ const productSource = new ProductData("tents");
 const url = document.querySelector(".product-list");
 const productList = new ProductListing("tents", productSource, url);
 
-
-
 productList.init();
