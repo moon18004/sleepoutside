@@ -50,23 +50,27 @@ export function renderList(list, id, hydrateFunction, ul) {
   });
 }
 export function updateCartNumber() {
-  let length = getLocalStorage("so-cart").length;
-  document.querySelector(".count").innerHTML = length;
+  if (getLocalStorage("so-cart") != null) {
+    let length = getLocalStorage("so-cart").length;
+    console.log(length);
+    console.log(document.querySelector(".count"));
+    document.querySelector(".count").innerHTML = length;
+  } else {
+    document.querySelector(".count").innerHTML = 0;
+  }
 }
-
 
 export function renderwithTemplate(parent_node, template, data, callback) {
-  let copy = template.content.cloneNode(true)
+  let copy = template.content.cloneNode(true);
 
-  if(callback){
-     copy = callback(copy, data);
+  if (callback) {
+    copy = callback(copy, data);
   }
-  
-  parent_node.appendChild(copy);
 
+  parent_node.appendChild(copy);
 }
 
-export async function loadTemplate(path){
+export async function loadTemplate(path) {
   const data = await fetch(path);
   const template = await data.text();
 
@@ -76,13 +80,13 @@ export async function loadTemplate(path){
   return newTemplate;
 }
 
-export async function loadHeaderFooter(){
+export async function loadHeaderFooter() {
   const footer = await loadTemplate("../partials/footer.html");
   const header = await loadTemplate("../partials/header.html");
 
   const head = document.querySelector("header");
   const foot = document.querySelector("footer");
 
-  renderwithTemplate(head , header);
-  renderwithTemplate(foot , footer);
+  renderwithTemplate(head, header);
+  renderwithTemplate(foot, footer);
 }

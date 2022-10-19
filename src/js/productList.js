@@ -1,4 +1,4 @@
-import { renderList, updateCartNumber } from "./utils.js";
+import { renderList, updateCartNumber, loadHeaderFooter } from "./utils.js";
 
 export default class ProductListing {
   constructor(category, dataSource, element) {
@@ -14,7 +14,7 @@ export default class ProductListing {
       this.prepareTemplate,
       this.element
     );
-
+    await loadHeaderFooter();
     updateCartNumber();
   }
   // renderList(list){

@@ -1,4 +1,11 @@
-import { getLocalStorage, setLocalStorage, updateCartNumber } from "./utils.js";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  updateCartNumber,
+  loadHeaderFooter,
+} from "./utils.js";
+
+await loadHeaderFooter();
 
 function getCartContents() {
   let markup = "";
@@ -16,7 +23,7 @@ function getCartContents() {
         "<h3>There are no items in your cart.</h3>")
     : (document.querySelector(".product-list").innerHTML = htmlItems.join(""));
   updateCartNumber();
-  getAndRenderTotal();
+  // getAndRenderTotal();
 }
 
 // function getAndRenderTotal(){
@@ -33,7 +40,6 @@ function getCartContents() {
 
 //  // rendering
 //  document.querySelector(".cart-total").innerHTML = total
-
 
 // };
 

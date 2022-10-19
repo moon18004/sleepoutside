@@ -3,7 +3,10 @@ import {
   animateBackpack,
   getLocalStorage,
   updateCartNumber,
+  loadHeaderFooter,
 } from "./utils";
+
+
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -18,8 +21,10 @@ export default class ProductDetails {
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addToCart.bind(this));
-    let length = getLocalStorage("so-cart").length;
-    document.querySelector(".count").innerHTML = length;
+    // let length = getLocalStorage("so-cart").length;
+    // document.querySelector(".count").innerHTML = length;
+    await loadHeaderFooter();
+    updateCartNumber();
   }
 
   addToCart() {
