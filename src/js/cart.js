@@ -19,23 +19,24 @@ function getCartContents() {
   getAndRenderTotal();
 }
 
-// function getAndRenderTotal(){
-//  var cartItems = JSON.parse(localStorage.getItem("so-cart"));
-//  var listPrices = cartItems.ListPrice;
-//  var total = 0;
+function getAndRenderTotal(){
+ var cartItems = JSON.parse(localStorage.getItem("so-cart"));
 
-//  total += listPrices;
-
-//  for (const item of cartItems) {
-//   total += listPrices;
-//  }
-//  console.log(total)
-
-//  // rendering
-//  document.querySelector(".cart-total").innerHTML = total
+ var total = 0;
+cartItems.forEach(element => {total += element.ListPrice
+  
+ });
+ console.log(total)
 
 
-// };
+ // rendering
+document.querySelector(".cart-total").innerHTML = total;
+document.querySelector(".cart-footer-hide").style.display = "block";
+ 
+
+
+
+};
 
 function eventListener(element, callback) {
   element.addEventListener("touchend", (event) => {
