@@ -1,1 +1,9 @@
-import t from"./productData.js";import o from"./productList.js";const r=new t("tents"),c=document.querySelector(".product-list"),s=new o("tents",r,c);s.init();
+import ProductData from "./productData.js";
+import ProductListing from "./productList.js";
+import { loadHeaderFooter } from "./utils.js";
+
+const productSource = new ProductData("tents");
+const url = document.querySelector(".product-list");
+const productList = new ProductListing("tents", productSource, url);
+
+productList.init();
