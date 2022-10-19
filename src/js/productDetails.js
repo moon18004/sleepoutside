@@ -47,7 +47,7 @@ export default class ProductDetails {
 
     // This is code for a version that would add a count to each item in the cart.
     // This would stop multiple copies of the same data being added to local storage.
-    //
+    
     // if the tent is already in the cart, increment the count instead of adding a new object to the array
     // let matched_item;
     // for (let item_index = 0; item_index < cart_items.length; item_index++) {
@@ -93,5 +93,4 @@ export default class ProductDetails {
       ).innerHTML = `<strike>Retail $${parseFloat(this.product.SuggestedRetailPrice).toFixed(2)}</strike> <span>Retail $${this.product.ListPrice}</span>`
       // <strike>$${parseFloat(this.product.SuggestedRetailPrice).toFixed(2)}</strike>
   }
-  
 }

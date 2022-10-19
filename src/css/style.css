@@ -168,6 +168,10 @@ button {
   margin: 0.5em 0;
 }
 
+.product-card__discount {
+  font-weight: bold;
+}
+
 .product-card__price > strike {
   color: gray
 }
