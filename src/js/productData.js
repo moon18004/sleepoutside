@@ -1,3 +1,5 @@
+const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
+
 // covert response to json
 function convertToJson(res) {
   if (res.ok) {
@@ -8,19 +10,20 @@ function convertToJson(res) {
 }
 
 export default class ProductData {
-  constructor(category) {
-    this.category = category;
-    this.path = `../json/${this.category}.json`;
+  constructor() {
+    // this.category = category;
+    // this.path = `../json/${this.category}.json`;
   }
 
-  getData() {
-    return fetch(this.path)
+  getData(category) {
+    return fetch(baseURL + `products/search/${category}`)
       .then(convertToJson)
-      .then((data) => data);
+      .then((data) => data.Result);
   }
 
   async findProductById(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    return await fetch(baseURL + `product/${id}`)
+      .then(convertToJson)
+      .then((data) => data.Result);
   }
 }

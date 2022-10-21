@@ -47,7 +47,7 @@ export default class ProductDetails {
 
     // This is code for a version that would add a count to each item in the cart.
     // This would stop multiple copies of the same data being added to local storage.
-    //
+
     // if the tent is already in the cart, increment the count instead of adding a new object to the array
     // let matched_item;
     // for (let item_index = 0; item_index < cart_items.length; item_index++) {
@@ -68,15 +68,34 @@ export default class ProductDetails {
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
         <img
           class="divider"
-          src="${this.product.Image}"
+          src="${this.product.Images.PrimaryLarge}"
           alt="${this.product.Name}"
         />
-
+        <p class="product-card__discount"></p>
         <p class="product-card__price">$${this.product.ListPrice}</p>
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
           <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
         </div>`;
+
+    // If there is a dicount, add it to the page.
+    if (this.product.SuggestedRetailPrice > this.product.ListPrice) {
+      // Percentage Discount
+      this.percentOff = Math.round(
+        (100 * (this.product.SuggestedRetailPrice - this.product.ListPrice)) /
+          this.product.SuggestedRetailPrice
+      );
+      document.querySelector(
+        ".product-card__discount"
+      ).innerHTML = `<span>${this.percentOff}% Off<span>`;
+    }
+    // Show discounted price
+    document.querySelector(
+      ".product-card__price"
+    ).innerHTML = `<strike>Retail $${parseFloat(
+      this.product.SuggestedRetailPrice
+    ).toFixed(2)}</strike> <span>Retail $${this.product.ListPrice}</span>`;
+    // <strike>$${parseFloat(this.product.SuggestedRetailPrice).toFixed(2)}</strike>
   }
 }

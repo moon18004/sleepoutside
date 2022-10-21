@@ -43,7 +43,7 @@ export function renderList(list, id, hydrateFunction, ul) {
   const filteredList = list.filter(
     (itme) => itme.Id != "989CG" && itme.Id != "880RT"
   );
-  
+
   filteredList.forEach((product) => {
     const clone = template.content.cloneNode(true);
     const hybratedTemplate = hydrateFunction(clone, product);
