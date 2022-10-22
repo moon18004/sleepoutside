@@ -131,6 +131,26 @@ button {
   line-height: 20px;
 }
 
+/* categories */
+.categories {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: black;
+}
+.product-item {
+  width: 150px;
+  padding: 12px;
+  margin: 10px;
+  text-decoration: none;
+}
+.product-item > img {
+  margin: 0;
+}
+.product-item > p {
+  margin: 8px;
+}
+
 /* End cart icon styles */
 
 .mission {
@@ -173,11 +193,11 @@ button {
 }
 
 .product-card__price > strike {
-  color: gray
+  color: gray;
 }
 
 .product-card__price > span {
-  color: red
+  color: red;
 }
 
 .card__brand {

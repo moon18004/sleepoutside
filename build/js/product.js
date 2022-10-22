@@ -3,7 +3,7 @@ import ProductDetails from "./productDetails.js";
 import { getParam } from "./utils.js";
 
 const productID = getParam("product");
-const dataSource = new ProductData("tents");
+const dataSource = new ProductData();
 
 const product = new ProductDetails(productID, dataSource);
 product.init();

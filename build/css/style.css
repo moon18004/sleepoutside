@@ -131,6 +131,26 @@ button {
   line-height: 20px;
 }
 
+/* categories */
+.categories {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: black;
+}
+.product-item {
+  width: 150px;
+  padding: 12px;
+  margin: 10px;
+  text-decoration: none;
+}
+.product-item > img {
+  margin: 0;
+}
+.product-item > p {
+  margin: 8px;
+}
+
 /* End cart icon styles */
 
 .mission {
@@ -166,6 +186,18 @@ button {
 .product-card h3,
 .product-card p {
   margin: 0.5em 0;
+}
+
+.product-card__discount {
+  font-weight: bold;
+}
+
+.product-card__price > strike {
+  color: gray;
+}
+
+.product-card__price > span {
+  color: red;
 }
 
 .card__brand {
