@@ -37,6 +37,7 @@ export function animateBackpack() {
     cartImg.classList.remove("anim-out");
   }, 300);
 }
+
 export function renderList(list, id, hydrateFunction, ul) {
   const template = document.getElementById(id);
   ul.innerHTML = "";
@@ -50,12 +51,16 @@ export function renderList(list, id, hydrateFunction, ul) {
     ul.appendChild(hybratedTemplate);
   });
 }
+
 export function updateCartNumber() {
-  if (getLocalStorage("so-cart") != null) {
-    let length = getLocalStorage("so-cart").length;
-    console.log(length);
-    console.log(document.querySelector(".count"));
-    document.querySelector(".count").innerHTML = length;
+  const items = getLocalStorage("so-cart");
+
+  if (items != null) {
+    let quantity = 0;
+    items.forEach(function (item) {
+      quantity += item.quantity;
+    })
+    document.querySelector(".count").innerHTML = quantity;
   } else {
     document.querySelector(".count").innerHTML = 0;
   }
