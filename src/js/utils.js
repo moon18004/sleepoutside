@@ -38,17 +38,39 @@ export function animateBackpack() {
   }, 300);
 }
 export function renderList(list, id, hydrateFunction, ul) {
-  const template = document.getElementById(id);
+  let template = document.getElementById(id);
+  console.log(id);
   ul.innerHTML = "";
-  const filteredList = list.filter(
-    (itme) => itme.Id != "989CG" && itme.Id != "880RT"
-  );
-
-  filteredList.forEach((product) => {
-    const clone = template.content.cloneNode(true);
-    const hybratedTemplate = hydrateFunction(clone, product);
-    ul.appendChild(hybratedTemplate);
-  });
+  // const filteredList = list.filter(
+  //   (itme) => itme.Id != "989CG" && itme.Id != "880RT"
+  // );
+  let sort = document.querySelector("#sortBy").value;
+  switch(sort){
+    case "sortByName":
+      const sorted_by_name = list.sort(
+        (a, b) => { let nameA = a.NameWithoutBrand.toLowerCase();
+                    let nameB = b.NameWithoutBrand.toLowerCase();
+                  if (nameA < nameB) return -1;
+                  else if(nameA > nameB) return 1;
+                  else return 0;})
+      sorted_by_name.forEach((product) => {
+        let clone = template.content.cloneNode(true);
+        let hybratedTemplate = hydrateFunction(clone, product);
+        ul.appendChild(hybratedTemplate);
+      });
+    case "sortByPrice":
+      const sorted_by_price = list.sort(
+        (a, b) => { let nameA = a.ListPrice;
+                    let nameB = b.ListPrice;
+                  if (nameA < nameB) return -1;
+                  else if(nameA > nameB) return 1;
+                  else return 0;})
+      sorted_by_price.forEach((product) => {
+        let clone = template.content.cloneNode(true);
+        let hybratedTemplate = hydrateFunction(clone, product);
+        ul.appendChild(hybratedTemplate);
+      });
+  }
 }
 export function updateCartNumber() {
   if (getLocalStorage("so-cart") != null) {

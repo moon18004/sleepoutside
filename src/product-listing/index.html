@@ -12,6 +12,13 @@
     <main class="divider">
       <section class="products">
         <h2>Top Products</h2>
+        <p>
+          Sort by: 
+          <select id="sortBy">
+              <option value="sortByName">Name Ascending</option>
+              <option value="sortByPrice">Price Ascending</option>
+          </select>
+        </p>
         <ul class="product-list">
           <!-- HTML template to build a product card -->
           <template id="product-card-template">
