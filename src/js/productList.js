@@ -9,39 +9,25 @@ export default class ProductListing {
   async init() {
     const list = await this.dataSource.getData(this.category);
     console.log(list);
-    let sort = document.querySelector("#sortBy").value;
-    console.log(sort);
-    const sorted_list = list.sort(
-      (a, b) => { let nameA = a.NameWithoutBrand.toLowerCase();
-                  let nameB = b.NameWithoutBrand.toLowerCase();
-                if (nameA < nameB) return -1;
-                else if(nameA > nameB) return 1;
-                else return 0;})
-    const sorted_by_price = list.sort(
-      (a, b) => { let nameA = a.ListPrice;
-                  let nameB = b.ListPrice;
-                if (nameA < nameB) return -1;
-                else if(nameA > nameB) return 1;
-                else return 0;})
-    console.log(sorted_by_price);
-    // renderList(
-    //   list,
-    //   "product-card-template",
-    //   this.prepareTemplate,
-    //   this.element
-    // );
-    
+
+    renderList(
+      list,
+      "product-card-template",
+      this.prepareTemplate,
+      this.element
+    );
+
     await loadHeaderFooter();
     updateCartNumber();
-    
-    document.querySelector('#sortBy').addEventListener('change', () => {
-      renderList(
-        list,
-        "product-card-template",
-        this.prepareTemplate,
-        this.element
-      );
-    });
+
+    // document.querySelector('#sortBy').addEventListener('change', () => {
+    //   renderList(
+    //     list,
+    //     "product-card-template",
+    //     this.prepareTemplate,
+    //     this.element
+    //   );
+    // });
 
     // renderList(
     //   list,
@@ -49,8 +35,7 @@ export default class ProductListing {
     //   this.prepareTemplate,
     //   this.element
     // )
-    console.log(document.querySelector('#sortBy').value)
-    
+    console.log(document.querySelector("#sortBy").value);
   }
   // renderList(list){
   //   this.element.innerHTML = "";
@@ -79,6 +64,3 @@ export default class ProductListing {
     return template;
   }
 }
-
-
-

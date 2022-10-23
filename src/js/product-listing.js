@@ -8,4 +8,3 @@ const url = document.querySelector(".product-list");
 const productList = new ProductListing(category, productSource, url);
 
 productList.init();
-
