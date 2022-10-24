@@ -140,6 +140,11 @@ button {
   max-width: 600px;
   margin: auto;
 }
+.newsletter{
+border: solid #303030 ;
+margin-left:;
+}
+
 .products {
   padding: 0.5em;
 }
