@@ -30,7 +30,6 @@ export function getParam(param) {
   return value;
 }
 
-
 export function animateBackpack() {
   var cartImg = document.querySelector(".cart");
   cartImg.classList.add("anim-out");
@@ -76,18 +75,14 @@ function sortList(list, template, callback, ul) {
   }
 }
 
-export function renderList(list, id, hydrateFunction, ul) {
-  let template = document.getElementById(id);
-  ul.innerHTML = "";
-  list.forEach((product) => {
-    let clone = template.content.cloneNode(true);
-    let hybratedTemplate = hydrateFunction(clone, product);
-    ul.appendChild(hybratedTemplate);
-  });
+export function renderList(ul, template, list, hydrateFunction, clear) {
+  // Empty the list if the list should be emptied
+  if (clear) ul.innerHTML = "";
 
-  document.querySelector("#sortBy").addEventListener("change", () => {
-    sortList(list, template, hydrateFunction, ul);
+  list.forEach((item) => {
+    renderwithTemplate(ul, template, item, hydrateFunction);
   });
+}
 
   // let sort = document.querySelector("#sortBy").value;
   // switch(sort){
@@ -116,13 +111,16 @@ export function renderList(list, id, hydrateFunction, ul) {
   //       ul.appendChild(hybratedTemplate);
   //     });
   // }
-}
+  // }
 
 export function updateCartNumber() {
-  if (getLocalStorage("so-cart") != null) {
-    let length = getLocalStorage("so-cart").length;
-
-    document.querySelector(".count").innerHTML = length;
+  const items = getLocalStorage("so-cart");
+  let quantity = 0;
+  if (items != null) {
+    items.forEach(function (item) {
+      quantity += item.quantity;
+    })
+    document.querySelector(".count").innerHTML = quantity;
   } else {
     document.querySelector(".count").innerHTML = 0;
   }
