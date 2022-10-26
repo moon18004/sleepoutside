@@ -12,6 +12,23 @@ export default class ProductListing {
     renderList(this.element, template, list, this.prepareTemplate, true);
     await loadHeaderFooter();
     updateCartNumber();
+
+    // document.querySelector('#sortBy').addEventListener('change', () => {
+    //   renderList(
+    //     list,
+    //     "product-card-template",
+    //     this.prepareTemplate,
+    //     this.element
+    //   );
+    // });
+
+    // renderList(
+    //   list,
+    //   "product-card-template",
+    //   this.prepareTemplate,
+    //   this.element
+    // )
+    console.log(document.querySelector("#sortBy").value);
   }
   
   prepareTemplate(template, product) {

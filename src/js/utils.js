@@ -39,27 +39,92 @@ export function animateBackpack() {
   }, 300);
 }
 
-export function renderList(ul, template, list, hydrateFunction, clear) {
-  // Empty the list if the list should be emptied
-  if (clear) ul.innerHTML = "";
-  
-  list.forEach((item) => {
-    renderwithTemplate(ul, template, item, hydrateFunction);
-    // const clone = template.content.cloneNode(true);
-    // const hybratedTemplate = hydrateFunction(clone, product);
-    // ul.appendChild(hybratedTemplate);
+function sortList(list, template, callback, ul) {
+  let sort = document.querySelector("#sortBy").value;
+  // console.log(template);
+  ul.innerHTML = "";
+  switch (sort) {
+    case "sortByName":
+      const sorted_by_name = list.sort((a, b) => {
+        let nameA = a.NameWithoutBrand.toLowerCase();
+        let nameB = b.NameWithoutBrand.toLowerCase();
+        if (nameA < nameB) return -1;
+        else if (nameA > nameB) return 1;
+        else return 0;
+        
+      });
+      sorted_by_name.forEach((product) => {
+        let clone = template.content.cloneNode(true);
+        let hybratedTemplate = callback(clone, product);
+        ul.appendChild(hybratedTemplate);
+      });
+      break;
+    case "sortByPrice":
+      const sorted_by_price = list.sort((a, b) => {
+        let nameA = a.ListPrice;
+        let nameB = b.ListPrice;
+        if (nameA < nameB) return -1;
+        else if (nameA > nameB) return 1;
+        else return 0;
+      });
+      sorted_by_price.forEach((product) => {
+        let clone = template.content.cloneNode(true);
+        let hybratedTemplate = callback(clone, product);
+        ul.appendChild(hybratedTemplate);
+      });
+      break;
+  }
+}
+export function renderList(list, id, hydrateFunction, ul) {
+  let template = document.getElementById(id);
+  ul.innerHTML = "";
+  // const filteredList = list.filter(
+  //   (itme) => itme.Id != "989CG" && itme.Id != "880RT"
+  // );
+  list.forEach((product) => {
+    let clone = template.content.cloneNode(true);
+    let hybratedTemplate = hydrateFunction(clone, product);
+    ul.appendChild(hybratedTemplate);
   });
+
+  document.querySelector("#sortBy").addEventListener("change", () => {
+    sortList(list, template, hydrateFunction, ul);
+  });
+
+  // let sort = document.querySelector("#sortBy").value;
+  // switch(sort){
+  //   case "sortByName":
+  //     const sorted_by_name = list.sort(
+  //       (a, b) => { let nameA = a.NameWithoutBrand.toLowerCase();
+  //                   let nameB = b.NameWithoutBrand.toLowerCase();
+  //                 if (nameA < nameB) return -1;
+  //                 else if(nameA > nameB) return 1;
+  //                 else return 0;})
+  //     sorted_by_name.forEach((product) => {
+  //       let clone = template.content.cloneNode(true);
+  //       let hybratedTemplate = hydrateFunction(clone, product);
+  //       ul.appendChild(hybratedTemplate);
+  //     });
+  //   case "sortByPrice":
+  //     const sorted_by_price = list.sort(
+  //       (a, b) => { let nameA = a.ListPrice;
+  //                   let nameB = b.ListPrice;
+  //                 if (nameA < nameB) return -1;
+  //                 else if(nameA > nameB) return 1;
+  //                 else return 0;})
+  //     sorted_by_price.forEach((product) => {
+  //       let clone = template.content.cloneNode(true);
+  //       let hybratedTemplate = hydrateFunction(clone, product);
+  //       ul.appendChild(hybratedTemplate);
+  //     });
+  // }
 }
 
 export function updateCartNumber() {
-  const items = getLocalStorage("so-cart");
+  if (getLocalStorage("so-cart") != null) {
+    let length = getLocalStorage("so-cart").length;
 
-  if (items != null) {
-    let quantity = 0;
-    items.forEach(function (item) {
-      quantity += item.quantity;
-    })
-    document.querySelector(".count").innerHTML = quantity;
+    document.querySelector(".count").innerHTML = length;
   } else {
     document.querySelector(".count").innerHTML = 0;
   }
