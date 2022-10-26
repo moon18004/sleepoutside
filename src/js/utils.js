@@ -38,17 +38,15 @@ export function animateBackpack() {
   }, 300);
 }
 
-export function renderList(list, id, hydrateFunction, ul) {
-  const template = document.getElementById(id);
-  ul.innerHTML = "";
-  const filteredList = list.filter(
-    (itme) => itme.Id != "989CG" && itme.Id != "880RT"
-  );
-
-  filteredList.forEach((product) => {
-    const clone = template.content.cloneNode(true);
-    const hybratedTemplate = hydrateFunction(clone, product);
-    ul.appendChild(hybratedTemplate);
+export function renderList(ul, template, list, hydrateFunction, clear) {
+  // Empty the list if the list should be emptied
+  if (clear) ul.innerHTML = "";
+  
+  list.forEach((item) => {
+    renderwithTemplate(ul, template, item, hydrateFunction);
+    // const clone = template.content.cloneNode(true);
+    // const hybratedTemplate = hydrateFunction(clone, product);
+    // ul.appendChild(hybratedTemplate);
   });
 }
 

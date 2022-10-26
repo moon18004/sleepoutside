@@ -1,4 +1,4 @@
-import { renderList, updateCartNumber, loadHeaderFooter } from "./utils.js";
+import { renderList, updateCartNumber, loadHeaderFooter, loadTemplate } from "./utils.js";
 
 export default class ProductListing {
   constructor(category, dataSource, element) {
@@ -8,28 +8,19 @@ export default class ProductListing {
   }
   async init() {
     const list = await this.dataSource.getData(this.category);
-    renderList(
-      list,
-      "product-card-template",
-      this.prepareTemplate,
-      this.element
-    );
+    const template = await loadTemplate("../partials/productCard.html");
+    renderList(this.element, template, list, this.prepareTemplate, true);
     await loadHeaderFooter();
     updateCartNumber();
   }
-  // renderList(list){
-  //   this.element.innerHTML = "";
-  //   const template = document.querySelector("#product-card-template");
-  //   renderListWithTemplate(template, this.element, list, this.prepareTemplate);
-  // }
+  
   prepareTemplate(template, product) {
     template.querySelector("a").href += product.Id;
     template.querySelector("img").src = product.Images.PrimaryMedium;
     template.querySelector("img").alt += product.Name;
     template.querySelector(".card__brand").innerHTML = product.Brand.Name;
     template.querySelector(".card__name").innerHTML = product.NameWithoutBrand;
-    template.querySelector(".product-card__price").innerHTML +=
-      product.ListPrice;
+    template.querySelector(".product-card__price").innerHTML +=  product.ListPrice;
 
     if (product.SuggestedRetailPrice > product.ListPrice) {
       let percentOff = Math.round(
