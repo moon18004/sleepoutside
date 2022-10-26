@@ -75,12 +75,10 @@ function sortList(list, template, callback, ul) {
       break;
   }
 }
+
 export function renderList(list, id, hydrateFunction, ul) {
   let template = document.getElementById(id);
   ul.innerHTML = "";
-  // const filteredList = list.filter(
-  //   (itme) => itme.Id != "989CG" && itme.Id != "880RT"
-  // );
   list.forEach((product) => {
     let clone = template.content.cloneNode(true);
     let hybratedTemplate = hydrateFunction(clone, product);
