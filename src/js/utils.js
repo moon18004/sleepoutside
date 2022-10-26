@@ -30,6 +30,7 @@ export function getParam(param) {
   return value;
 }
 
+
 export function animateBackpack() {
   var cartImg = document.querySelector(".cart");
   cartImg.classList.add("anim-out");
