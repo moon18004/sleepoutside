@@ -8,14 +8,34 @@ export default class ProductListing {
   }
   async init() {
     const list = await this.dataSource.getData(this.category);
+    console.log(list);
+
     renderList(
       list,
       "product-card-template",
       this.prepareTemplate,
       this.element
     );
+
     await loadHeaderFooter();
     updateCartNumber();
+
+    // document.querySelector('#sortBy').addEventListener('change', () => {
+    //   renderList(
+    //     list,
+    //     "product-card-template",
+    //     this.prepareTemplate,
+    //     this.element
+    //   );
+    // });
+
+    // renderList(
+    //   list,
+    //   "product-card-template",
+    //   this.prepareTemplate,
+    //   this.element
+    // )
+    console.log(document.querySelector("#sortBy").value);
   }
   // renderList(list){
   //   this.element.innerHTML = "";

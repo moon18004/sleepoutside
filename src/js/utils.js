@@ -50,7 +50,6 @@ function sortList(list, template, callback, ul) {
         if (nameA < nameB) return -1;
         else if (nameA > nameB) return 1;
         else return 0;
-        
       });
       sorted_by_name.forEach((product) => {
         let clone = template.content.cloneNode(true);
