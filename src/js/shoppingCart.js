@@ -23,10 +23,11 @@ function getCartContents(parent, template, callback) {
     getAndRenderTotal();
 }
 
-async function removeItem(id) {
-    // console.log(id)
-    const listElement = document.querySelector(".product-list");
-    const template = await loadTemplate("../partials/cartItem.html");
+async function removeItem() {
+    const listElement = this.closest("li");
+    const id = this.dataset.id;
+    console.log(this.dataset.id)
+    console.log(this)
     let cartItems = getLocalStorage("so-cart");
 
     // Find the item in the cart
@@ -44,29 +45,14 @@ async function removeItem(id) {
     } 
     else {
         cartItems[i].quantity -= 1;
-        if (cartItems[i].quantity <= 0) cartItems.splice(itemIndex, 1);
+        listElement.querySelector(".cart-card__quantity").innerHTML = `qty: ${cartItems[i].quantity}`;
+        if (cartItems[i].quantity <= 0) {
+          cartItems.splice(itemIndex, 1);
+          listElement.innerHTML = '';
+        } // just change the quantity displayed in the cart to complete
     }
-    setLocalStorage("so-cart", cartItems);
-
-    // Reload the cart
-    document.querySelector(".product-list").innerHTML = "";
-    getCartContents(listElement, template, renderCartItem);
-
-    const removeButtons = [
-        document.querySelectorAll(".cart-card__remove-item")
-    ];
-
-    removeButtons.forEach(function (item) {
-        item.addEventListener("click", (e) => {
-          removeItem(item.dataset.id), item.closest("li");
-        });
-    });
-
-    removeButtons.map((element) =>
-      eventListener(element, removeItem.bind(element.dataset.id))
-    );
-
     
+    setLocalStorage("so-cart", cartItems);
     updateCartNumber();
 }
 
@@ -81,7 +67,7 @@ function renderCartItem(template, product) {
     template.querySelector(".cart-card__color").innerHTML = product.Colors[0].ColorName;
     template.querySelector(".cart-card__quantity").innerHTML += product.quantity;
     template.querySelector(".cart-card__price").innerHTML += product.FinalPrice;
-    template.querySelector(".cart-card__remove-item").dataset.id = product.id;
+    template.querySelector(".cart-card__remove-item").dataset.id = product.Id;
 
     return template;
 }
@@ -121,10 +107,7 @@ export default class ShoppingCart {
 
     // Set up the remove buttons.
     const removeButtons = [...document.querySelectorAll(".cart-card__remove-item")];
-    removeButtons.forEach(function (item, idx) {
-    item.addEventListener("click", (e) => {
-      removeItem(item.dataset.id,  item.closest("li"));
-    });
-    });
+    removeButtons.forEach(function (item) {
+    item.addEventListener("click", removeItem, false)});
   }
 }
