@@ -49,7 +49,7 @@ async function removeItem() {
         if (cartItems[i].quantity <= 0) {
           cartItems.splice(itemIndex, 1);
           listElement.innerHTML = '';
-        } // just change the quantity displayed in the cart to complete
+        }
     }
     
     setLocalStorage("so-cart", cartItems);
