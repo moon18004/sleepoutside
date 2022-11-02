@@ -11,8 +11,6 @@ await loadHeaderFooter();
 const cart = new ShoppingCart();
 cart.init();
 
-<<<<<<< HEAD
-=======
 function getCartContents() {
   let markup = "";
   let cartItems;
@@ -31,7 +29,6 @@ function getCartContents() {
   updateCartNumber();
   getAndRenderTotal();
 }
->>>>>>> a92ea57eac1885e7c4f7986c972865f322e270c0
 
 // function getCartContents() {
 //   // Get the cart items.
