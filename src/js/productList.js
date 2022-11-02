@@ -20,10 +20,9 @@ export default class ProductListing {
     await loadHeaderFooter();
     updateCartNumber();
 
-    
     console.log(document.querySelector("#sortBy").value);
   }
- 
+
   prepareTemplate(template, product) {
     template.querySelector("a").href += product.Id;
     template.querySelector("img").src = product.Images.PrimaryMedium;
