@@ -2,14 +2,16 @@ import { getLocalStorage } from './utils.js';
 import ExternalServices from './ExternalServices.js';
 
 const services = new ExternalServices();
+
 function formDataToJSON(formElement) {
   const formData = new FormData(formElement),
     convertedJSON = {};
-
+  console.log(formElement);
+  console.log(formData);
   formData.forEach(function (value, key) {
     convertedJSON[key] = value;
   });
-
+  console.log(convertedJSON);
   return convertedJSON;
 }
 
