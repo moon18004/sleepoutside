@@ -11,6 +11,27 @@ await loadHeaderFooter();
 const cart = new ShoppingCart();
 cart.init();
 
+<<<<<<< HEAD
+=======
+function getCartContents() {
+  let markup = "";
+  let cartItems;
+  try {
+    cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+    if (!Array.isArray(cartItems)) cartItems = [cartItems];
+  } catch (err) {
+    cartItems = [];
+  }
+  console.log(cartItems);
+  const htmlItems = cartItems.map((item) => renderCartItem(item));
+  cartItems.length == 0
+    ? (document.querySelector(".product-list").innerHTML =
+        "<h3>There are no items in your cart.</h3>")
+    : (document.querySelector(".product-list").innerHTML = htmlItems.join(""));
+  updateCartNumber();
+  getAndRenderTotal();
+}
+>>>>>>> a92ea57eac1885e7c4f7986c972865f322e270c0
 
 // function getCartContents() {
 //   // Get the cart items.

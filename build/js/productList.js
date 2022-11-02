@@ -8,20 +8,21 @@ export default class ProductListing {
   }
   async init() {
     const list = await this.dataSource.getData(this.category);
+    console.log(list);
+
     renderList(
       list,
       "product-card-template",
       this.prepareTemplate,
       this.element
     );
+
     await loadHeaderFooter();
     updateCartNumber();
+
+    console.log(document.querySelector("#sortBy").value);
   }
-  // renderList(list){
-  //   this.element.innerHTML = "";
-  //   const template = document.querySelector("#product-card-template");
-  //   renderListWithTemplate(template, this.element, list, this.prepareTemplate);
-  // }
+
   prepareTemplate(template, product) {
     template.querySelector("a").href += product.Id;
     template.querySelector("img").src = product.Images.PrimaryMedium;
