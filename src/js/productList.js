@@ -15,11 +15,6 @@ export default class ProductListing {
 
     console.log(document.querySelector("#sortBy").value);
   }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> a92ea57eac1885e7c4f7986c972865f322e270c0
   prepareTemplate(template, product) {
     template.querySelector("a").href += product.Id;
     template.querySelector("img").src = product.Images.PrimaryMedium;
