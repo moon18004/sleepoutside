@@ -6,8 +6,7 @@ const services = new ExternalServices();
 function formDataToJSON(formElement) {
   const formData = new FormData(formElement),
     convertedJSON = {};
-  console.log(formElement);
-  console.log(formData);
+  
   formData.forEach(function (value, key) {
     convertedJSON[key] = value;
   });
@@ -17,7 +16,7 @@ function formDataToJSON(formElement) {
 
 function packageItems(items) {
   const simplifiedItems = items.map((item) => {
-    console.log(item);
+    // console.log(item);
     return {
       id: item.Id,
       price: item.FinalPrice,

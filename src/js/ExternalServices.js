@@ -2,10 +2,11 @@ const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
 // const baseURL = 'http://157.201.228.93:2992/';
 // covert response to json
 function convertToJson(res) {
+  const json = res.json()
   if (res.ok) {
-    return res.json();
+    return json
   } else {
-    throw new Error("Bad Response");
+    throw { name: 'servicesError', message: json };
   }
 }
 
