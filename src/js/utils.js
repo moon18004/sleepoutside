@@ -120,9 +120,11 @@ export function updateCartNumber() {
       quantity += item.quantity;
     })
     document.querySelector(".count").innerHTML = quantity;
+    
   } else {
     document.querySelector(".count").innerHTML = 0;
   }
+  
 }
 
 export function renderwithTemplate(parent_node, template, data, callback) {
