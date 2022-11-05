@@ -157,3 +157,32 @@ export async function loadHeaderFooter() {
   renderwithTemplate(head, header);
   renderwithTemplate(foot, footer);
 }
+
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+  
+  alert.addEventListener('click', function(e) {
+      if(e.target.tagName == 'SPAN') {
+        main.removeChild(this);
+      }
+  })
+  const main = document.querySelector('main');
+  main.prepend(alert);
+  
+  
+  if(scroll)
+    window.scrollTo(0,0);
+
+  // left this here to show how you could remove the alert automatically after a certain amount of time.
+  // setTimeout(function () {
+  //   main.removeChild(alert);
+  // }, duration);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll('.alert');
+  alerts.forEach(alert => document.querySelector('main').removeChild(alert));
+}
