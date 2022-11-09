@@ -1,13 +1,20 @@
-import { getLocalStorage } from "./utils.js";
+import {
+  setLocalStorage,
+  getLocalStorage,
+  alertMessage,
+  removeAllAlerts,
+} from "./utils.js";
 import ExternalServices from "./ExternalServices.js";
 
 const services = new ExternalServices();
 
 function formDataToJSON(formElement) {
-  const formData = new FormData(formElement),
-    convertedJSON = {};
-  console.log(formElement);
-  console.log(formData);
+  const formData = new FormData(formElement);
+  // const converted = Object.fromEntries(formData.entries());
+
+  // return converted;
+  let convertedJSON = {};
+
   formData.forEach(function (value, key) {
     convertedJSON[key] = value;
   });
@@ -17,7 +24,7 @@ function formDataToJSON(formElement) {
 
 function packageItems(items) {
   const simplifiedItems = items.map((item) => {
-    console.log(item);
+    // console.log(item);
     return {
       id: item.Id,
       price: item.FinalPrice,
@@ -51,7 +58,7 @@ export default class CheckoutProcess {
     );
     itemNumElement.innerText = this.list.length;
     // calculate the total of all the items in the cart
-    const amounts = this.list.map((item) => item.FinalPrice);
+    const amounts = this.list.map((item) => item.FinalPrice * item.quantity);
     this.itemTotal = amounts.reduce((sum, item) => sum + item);
     summaryElement.innerText = "$" + this.itemTotal;
   }
@@ -89,7 +96,15 @@ export default class CheckoutProcess {
     try {
       const res = await services.checkout(json);
       console.log(res);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/checkedout.html");
     } catch (err) {
+      removeAllAlerts();
+      for (let message in err.message) {
+        console.log(message);
+        alertMessage(err.message[message]);
+      }
+      console.log(err.message);
       console.log(err);
     }
   }

@@ -1,4 +1,9 @@
-import { renderList, updateCartNumber, loadHeaderFooter } from "./utils.js";
+import {
+  renderList,
+  updateCartNumber,
+  loadHeaderFooter,
+  loadTemplate,
+} from "./utils.js";
 
 export default class ProductListing {
   constructor(category, dataSource, element) {
@@ -8,21 +13,13 @@ export default class ProductListing {
   }
   async init() {
     const list = await this.dataSource.getData(this.category);
-    console.log(list);
-
-    renderList(
-      list,
-      "product-card-template",
-      this.prepareTemplate,
-      this.element
-    );
-
+    const template = await loadTemplate("../partials/productCard.html");
+    renderList(this.element, template, list, this.prepareTemplate, true);
     await loadHeaderFooter();
     updateCartNumber();
 
     console.log(document.querySelector("#sortBy").value);
   }
-
   prepareTemplate(template, product) {
     template.querySelector("a").href += product.Id;
     template.querySelector("img").src = product.Images.PrimaryMedium;

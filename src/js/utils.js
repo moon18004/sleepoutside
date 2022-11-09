@@ -158,8 +158,6 @@ export async function loadHeaderFooter() {
 }
 
 export function alertMessage(message, scroll = true) {
-  
-
   const alert = document.createElement("div");
   alert.classList.add("alert");
   alert.innerHTML = `<p>${message}</p><span>X</span>`;
