@@ -89,8 +89,14 @@ export default class CheckoutProcess {
     try {
       const res = await services.checkout(json);
       console.log(res);
+      // localStorage.removeItem("so-cart");
+      // alert("Success")
+      window.location.pathname = "../checkedout.html"
     } catch (err) {
       console.log(err);
     }
+
+    // localStorage.removeItem("so-cart");
+    
   }
 }
