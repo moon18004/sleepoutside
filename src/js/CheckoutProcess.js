@@ -90,7 +90,7 @@ export default class CheckoutProcess {
       const res = await services.checkout(json);
       console.log(res);
       // localStorage.removeItem("so-cart");
-      // alert("Success")
+      // alert("Success") used the checkedout.html page instead
       window.location.pathname = "../checkedout.html"
     } catch (err) {
       console.log(err);
