@@ -13,8 +13,11 @@ document
 // listening for click on the button
 document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
   e.preventDefault();
-  // 
- 
+  //
+  const formElement = document.forms["checkout"];
+  const checkForm = formElement.checkValidity();
+  formElement.reportValidity();
+  if (checkForm) {
     myCheckout.checkout();
-
+  }
 });

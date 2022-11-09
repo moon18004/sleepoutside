@@ -1,12 +1,20 @@
-import { getLocalStorage } from "./utils.js";
+import {
+  setLocalStorage,
+  getLocalStorage,
+  alertMessage,
+  removeAllAlerts,
+} from "./utils.js";
 import ExternalServices from "./ExternalServices.js";
 
 const services = new ExternalServices();
 
 function formDataToJSON(formElement) {
-  const formData = new FormData(formElement),
-    convertedJSON = {};
-  
+  const formData = new FormData(formElement);
+  // const converted = Object.fromEntries(formData.entries());
+
+  // return converted;
+  let convertedJSON = {};
+
   formData.forEach(function (value, key) {
     convertedJSON[key] = value;
   });
@@ -88,7 +96,15 @@ export default class CheckoutProcess {
     try {
       const res = await services.checkout(json);
       console.log(res);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/checkedout.html");
     } catch (err) {
+      removeAllAlerts();
+      for (let message in err.message) {
+        console.log(message);
+        alertMessage(err.message[message]);
+      }
+      console.log(err.message);
       console.log(err);
     }
   }

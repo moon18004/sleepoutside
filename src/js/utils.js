@@ -83,34 +83,34 @@ export function renderList(ul, template, list, hydrateFunction, clear) {
   });
 }
 
-  // let sort = document.querySelector("#sortBy").value;
-  // switch(sort){
-  //   case "sortByName":
-  //     const sorted_by_name = list.sort(
-  //       (a, b) => { let nameA = a.NameWithoutBrand.toLowerCase();
-  //                   let nameB = b.NameWithoutBrand.toLowerCase();
-  //                 if (nameA < nameB) return -1;
-  //                 else if(nameA > nameB) return 1;
-  //                 else return 0;})
-  //     sorted_by_name.forEach((product) => {
-  //       let clone = template.content.cloneNode(true);
-  //       let hybratedTemplate = hydrateFunction(clone, product);
-  //       ul.appendChild(hybratedTemplate);
-  //     });
-  //   case "sortByPrice":
-  //     const sorted_by_price = list.sort(
-  //       (a, b) => { let nameA = a.ListPrice;
-  //                   let nameB = b.ListPrice;
-  //                 if (nameA < nameB) return -1;
-  //                 else if(nameA > nameB) return 1;
-  //                 else return 0;})
-  //     sorted_by_price.forEach((product) => {
-  //       let clone = template.content.cloneNode(true);
-  //       let hybratedTemplate = hydrateFunction(clone, product);
-  //       ul.appendChild(hybratedTemplate);
-  //     });
-  // }
-  // }
+// let sort = document.querySelector("#sortBy").value;
+// switch(sort){
+//   case "sortByName":
+//     const sorted_by_name = list.sort(
+//       (a, b) => { let nameA = a.NameWithoutBrand.toLowerCase();
+//                   let nameB = b.NameWithoutBrand.toLowerCase();
+//                 if (nameA < nameB) return -1;
+//                 else if(nameA > nameB) return 1;
+//                 else return 0;})
+//     sorted_by_name.forEach((product) => {
+//       let clone = template.content.cloneNode(true);
+//       let hybratedTemplate = hydrateFunction(clone, product);
+//       ul.appendChild(hybratedTemplate);
+//     });
+//   case "sortByPrice":
+//     const sorted_by_price = list.sort(
+//       (a, b) => { let nameA = a.ListPrice;
+//                   let nameB = b.ListPrice;
+//                 if (nameA < nameB) return -1;
+//                 else if(nameA > nameB) return 1;
+//                 else return 0;})
+//     sorted_by_price.forEach((product) => {
+//       let clone = template.content.cloneNode(true);
+//       let hybratedTemplate = hydrateFunction(clone, product);
+//       ul.appendChild(hybratedTemplate);
+//     });
+// }
+// }
 
 export function updateCartNumber() {
   const items = getLocalStorage("so-cart");
@@ -118,13 +118,12 @@ export function updateCartNumber() {
   if (items != null) {
     items.forEach(function (item) {
       quantity += item.quantity;
-    })
+    });
     document.querySelector(".count").innerHTML = quantity;
-    
   } else {
     document.querySelector(".count").innerHTML = 0;
   }
-  
+  console.log(quantity);
 }
 
 export function renderwithTemplate(parent_node, template, data, callback) {
@@ -156,4 +155,33 @@ export async function loadHeaderFooter() {
 
   renderwithTemplate(head, header);
   renderwithTemplate(foot, footer);
+}
+
+export function alertMessage(message, scroll = true) {
+  
+
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      //console.log(e);
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  if (scroll) window.scrollTo(0, 0);
+
+  // left this here to show how you could remove the alert automatically after a certain amount of time.
+  // setTimeout(function () {
+  //   main.removeChild(alert);
+  // }, duration);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
