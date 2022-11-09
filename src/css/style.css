@@ -299,25 +299,25 @@ button {
 }
 
 /* alert style */
-.alert{
+.alert {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 80%;
-  
+
   background-color: #ffecd2;
   padding: 4px;
   margin: 0 auto;
   border: 1px solid #fcb69f;
 }
-.alert:nth-child(1){
+.alert:nth-child(1) {
   margin-top: 10px;
 }
-.alert p{
+.alert p {
   margin: 8px;
 }
-.alert span:hover{
-  cursor: pointer
+.alert span:hover {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 500px) {

@@ -3,7 +3,7 @@ import {
   setLocalStorage,
   updateCartNumber,
   loadHeaderFooter,
-  renderwithTemplate
+  renderwithTemplate,
 } from "./utils.js";
 import ShoppingCart from "./shoppingCart.js";
 
@@ -74,7 +74,7 @@ function getCartContents() {
 
 // function removeItem(id) {
 //   let cartItems = getLocalStorage("so-cart");
-  
+
 //   // Find the item in the cart
 //   let itemIndex = -1;
 //   for (var i = 0; i < cartItems.length; i++) {
@@ -87,7 +87,7 @@ function getCartContents() {
 //   // Remove the item
 //   if (itemIndex < 0) {
 //     console.log("ERROR: ID does not exist in the cart.");
-//   } 
+//   }
 //   else {
 //     cartItems[i].quantity -= 1;
 //     if (cartItems[i].quantity <= 0) cartItems.splice(itemIndex, 1);
@@ -97,11 +97,11 @@ function getCartContents() {
 //   // Reload the cart
 //   document.querySelector(".product-list").innerHTML = "";
 //   getCartContents();
-  
+
 //   const removeButtons = [
 //     ...document.querySelectorAll(".cart-card__remove-item"),
 //   ];
-  
+
 //   removeButtons.forEach(function (item) {
 //     item.addEventListener("click", (e) => {
 //       removeItem(item.dataset.id, item.closest("li"));
@@ -119,7 +119,7 @@ function getCartContents() {
 //   template.querySelector(".cart-card__color").innerHTML = product.Colors[0].ColorName;
 //   template.querySelector(".cart-card__quantity").innerHTML += product.quantity;
 //   template.querySelector(".cart-card__price").innerHTML += product.FinalPrice;
-//   template.querySelector(".cart-card__remove-item").data.id = product.id 
+//   template.querySelector(".cart-card__remove-item").data.id = product.id
 //   template.querySelector(".card__brand").innerHTML = product.Brand.Name;
 //   template.querySelector(".product-card__price").innerHTML +=  product.ListPrice;
 

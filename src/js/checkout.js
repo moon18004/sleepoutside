@@ -1,4 +1,4 @@
-import { loadHeaderFooter, updateCartNumber,  } from "./utils.js";
+import { loadHeaderFooter, updateCartNumber } from "./utils.js";
 import CheckoutProcess from "./CheckoutProcess.js";
 
 await loadHeaderFooter();
@@ -13,12 +13,11 @@ document
 // listening for click on the button
 document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
   e.preventDefault();
-  // 
+  //
   const formElement = document.forms["checkout"];
   const checkForm = formElement.checkValidity();
   formElement.reportValidity();
-  if(checkForm){
+  if (checkForm) {
     myCheckout.checkout();
   }
-  
 });
