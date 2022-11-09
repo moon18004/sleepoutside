@@ -36,16 +36,16 @@ export default class ProductDetails {
     }
 
     // If there is no count attribute, create it, and set it to one.
-    
+
     // See if the cart already contains the item we have added.
     let matched_item;
     for (let item_index = 0; item_index < cart_items.length; item_index++) {
       let item = cart_items[item_index];
-      console.log(item.Id)
-      console.log(this.product.Id)
+      console.log(item.Id);
+      console.log(this.product.Id);
       if (item.Id == this.product.Id) matched_item = item_index;
     }
-    
+
     // Increment the quantity if the item is already in the cart.
     if (matched_item != null) {
       cart_items[matched_item].quantity = cart_items[matched_item].quantity + 1;
@@ -61,7 +61,7 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
-    console.log(JSON.stringify(this.product, 0, 2))
+    console.log(JSON.stringify(this.product, 0, 2));
     document.querySelector(
       ".product-detail"
     ).innerHTML = `<h3>${this.product.Brand.Name}</h3>
@@ -96,7 +96,7 @@ export default class ProductDetails {
     ).innerHTML = `<strike>Retail $${parseFloat(
       this.product.SuggestedRetailPrice
     ).toFixed(2)}</strike> <span>Retail $${this.product.ListPrice}</span>`;
-    
+
     // Update the title of the page to reflect the product name.
     document.title += this.product.Name;
   }

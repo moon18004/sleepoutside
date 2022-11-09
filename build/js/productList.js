@@ -1,4 +1,11 @@
-import { renderList, updateCartNumber, loadHeaderFooter } from "./utils.js";
+import {
+  renderList,
+  updateCartNumber,
+  loadHeaderFooter,
+  loadTemplate,
+  sortList,
+  searchItem,
+} from "./utils.js";
 
 export default class ProductListing {
   constructor(category, dataSource, element) {
@@ -8,21 +15,29 @@ export default class ProductListing {
   }
   async init() {
     const list = await this.dataSource.getData(this.category);
-    console.log(list);
-
-    renderList(
-      list,
-      "product-card-template",
-      this.prepareTemplate,
-      this.element
-    );
-
+    const template = await loadTemplate("../partials/productCard.html");
+    renderList(this.element, template, list, this.prepareTemplate, true);
     await loadHeaderFooter();
     updateCartNumber();
+    document.querySelector("#sortBy").addEventListener("change", () => {
+      sortList(list, template, this.prepareTemplate, this.element);
+    });
+
+    const input = document.querySelector("#search");
+    document.querySelector(".searchBtn").addEventListener("click", () => {
+      searchItem(
+        input.value,
+        list,
+        template,
+        this.prepareTemplate,
+        this.element
+      );
+      // input.value = "";
+      // input.focus();
+    });
 
     console.log(document.querySelector("#sortBy").value);
   }
-
   prepareTemplate(template, product) {
     template.querySelector("a").href += product.Id;
     template.querySelector("img").src = product.Images.PrimaryMedium;

@@ -96,7 +96,7 @@ function getAndRenderTotal() {
   });
 
   // rendering
-  document.querySelector(".cart-total").innerHTML = total.toFixed(2);
+  document.querySelector(".cart-total").innerHTML = total;
   document.querySelector(".cart-footer-hide").style.display = "block";
 }
 
