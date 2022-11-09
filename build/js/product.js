@@ -7,4 +7,3 @@ const dataSource = new ExternalServices();
 
 const product = new ProductDetails(productID, dataSource);
 product.init();
-// add listener to Add to Cart button

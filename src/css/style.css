@@ -336,6 +336,44 @@ button:active {
   font-size: 1em;
 }
 
+/* alert style */
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+
+  background-color: #ffecd2;
+  padding: 4px;
+  margin: 0 auto;
+  border: 1px solid #fcb69f;
+}
+.alert:nth-child(1) {
+  margin-top: 10px;
+}
+.alert p {
+  margin: 8px;
+}
+.alert span:hover {
+  cursor: pointer;
+}
+.product-list-function {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* search */
+.search-input {
+  display: flex;
+  align-items: center;
+}
+.search-input input {
+  height: 2em;
+}
+.search-input button {
+  padding: 4px;
+  font-size: 14px;
+}
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

@@ -1,4 +1,11 @@
-import { renderList, updateCartNumber, loadHeaderFooter, loadTemplate } from "./utils.js";
+import {
+  renderList,
+  updateCartNumber,
+  loadHeaderFooter,
+  loadTemplate,
+  sortList,
+  searchItem,
+} from "./utils.js";
 
 export default class ProductListing {
   constructor(category, dataSource, element) {
@@ -12,6 +19,22 @@ export default class ProductListing {
     renderList(this.element, template, list, this.prepareTemplate, true);
     await loadHeaderFooter();
     updateCartNumber();
+    document.querySelector("#sortBy").addEventListener("change", () => {
+      sortList(list, template, this.prepareTemplate, this.element);
+    });
+
+    const input = document.querySelector("#search");
+    document.querySelector(".searchBtn").addEventListener("click", () => {
+      searchItem(
+        input.value,
+        list,
+        template,
+        this.prepareTemplate,
+        this.element
+      );
+      // input.value = "";
+      // input.focus();
+    });
 
     console.log(document.querySelector("#sortBy").value);
   }
@@ -21,7 +44,8 @@ export default class ProductListing {
     template.querySelector("img").alt += product.Name;
     template.querySelector(".card__brand").innerHTML = product.Brand.Name;
     template.querySelector(".card__name").innerHTML = product.NameWithoutBrand;
-    template.querySelector(".product-card__price").innerHTML +=  product.ListPrice;
+    template.querySelector(".product-card__price").innerHTML +=
+      product.ListPrice;
 
     if (product.SuggestedRetailPrice > product.ListPrice) {
       let percentOff = Math.round(
