@@ -319,7 +319,23 @@ button {
 .alert span:hover {
   cursor: pointer;
 }
+.product-list-function {
+  display: flex;
+  justify-content: space-between;
+}
 
+/* search */
+.search-input {
+  display: flex;
+  align-items: center;
+}
+.search-input input {
+  height: 2em;
+}
+.search-input button {
+  padding: 4px;
+  font-size: 14px;
+}
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

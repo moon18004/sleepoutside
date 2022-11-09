@@ -38,7 +38,7 @@ export function animateBackpack() {
   }, 300);
 }
 
-function sortList(list, template, callback, ul) {
+export function sortList(list, template, callback, ul) {
   let sort = document.querySelector("#sortBy").value;
   // console.log(template);
   ul.innerHTML = "";
@@ -72,6 +72,21 @@ function sortList(list, template, callback, ul) {
       });
       break;
   }
+}
+
+export function searchItem(input, list, template, callback, ul) {
+  let result_list = list.filter((item) => {
+    const name = item.NameWithoutBrand;
+    if (name.toLowerCase().indexOf(input.toLowerCase()) != -1) {
+      return item;
+    }
+  });
+  ul.innerHTML = "";
+  result_list.forEach((product) => {
+    let clone = template.content.cloneNode(true);
+    let hybratedTemplate = callback(clone, product);
+    ul.appendChild(hybratedTemplate);
+  });
 }
 
 export function renderList(ul, template, list, hydrateFunction, clear) {

@@ -12,13 +12,20 @@
     <main class="divider">
       <section class="products">
         <h2>Top Products</h2>
-        <p>
-          Sort by:
-          <select id="sortBy">
-            <option value="sortByName">Name</option>
-            <option value="sortByPrice">Price</option>
-          </select>
-        </p>
+        <div class="product-list-function">
+          <p>
+            Sort by:
+            <select id="sortBy">
+              <option value="sortByName">Name</option>
+              <option value="sortByPrice">Price</option>
+            </select>
+          </p>
+          <div class="search-input">
+            <label for="search"></label>
+            <input type="text" id="search" name="search" />
+            <button class="searchBtn">search</button>
+          </div>
+        </div>
         <ul class="product-list">
           <!-- HTML template to build a product card -->
           <template id="product-card-template">
