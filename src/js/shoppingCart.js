@@ -53,6 +53,7 @@ async function removeItem() {
     }
     
     setLocalStorage("so-cart", cartItems);
+    getAndRenderTotal();
     updateCartNumber();
 }
 
@@ -85,11 +86,11 @@ function getAndRenderTotal() {
 
   var total = 0;
   cartItems.forEach((element) => {
-    total += element.ListPrice;
+    total += element.ListPrice * element.quantity;
   });
 
   // rendering
-  document.querySelector(".cart-total").innerHTML = total;
+  document.querySelector(".cart-total").innerHTML = total.toFixed(2);
   document.querySelector(".cart-footer-hide").style.display = "block";
 }
 

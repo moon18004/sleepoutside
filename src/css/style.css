@@ -89,10 +89,45 @@ button {
   display: block;
   border: 0;
   font-size: var(--large-font);
+  transition: .2s;
+  text-decoration: none;
 }
+
+button:hover {
+  background-color: #525b0fce;
+}
+button:active {
+  transform: scale(.95);
+  background-color: var(--secondary-color);
+}
+
+/* Button Links */
+.button {
+  padding: 0.5em 2em;
+  background-color: var(--secondary-color);
+  color: white;
+  margin: auto;
+  display: block;
+  border: 0;
+  font-size: var(--large-font);
+  transition: .2s;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.button:hover {
+  background-color: #525b0fce;
+}
+
+.button:active {
+  transform: scale(.95);
+  background-color: var(--secondary-color);
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
+
 /* End utility classes */
 
 /* Cart icon styles */
@@ -218,6 +253,9 @@ button {
 .product-detail img {
   width: 100%;
 }
+
+/* The add item button */
+
 
 /* Start cart list card styles */
 .cart-card {

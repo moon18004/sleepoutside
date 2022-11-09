@@ -2,6 +2,7 @@
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
+
 // or a more concise version if you are into that sort of thing:
 // export const qs = (selector, parent = document) => parent.querySelector(selector);
 
@@ -9,10 +10,12 @@ export function qs(selector, parent = document) {
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
+
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -82,36 +85,6 @@ export function renderList(ul, template, list, hydrateFunction, clear) {
     renderwithTemplate(ul, template, item, hydrateFunction);
   });
 }
-
-  // let sort = document.querySelector("#sortBy").value;
-  // switch(sort){
-  //   case "sortByName":
-  //     const sorted_by_name = list.sort(
-  //       (a, b) => { let nameA = a.NameWithoutBrand.toLowerCase();
-  //                   let nameB = b.NameWithoutBrand.toLowerCase();
-  //                 if (nameA < nameB) return -1;
-  //                 else if(nameA > nameB) return 1;
-  //                 else return 0;})
-  //     sorted_by_name.forEach((product) => {
-  //       let clone = template.content.cloneNode(true);
-  //       let hybratedTemplate = hydrateFunction(clone, product);
-  //       ul.appendChild(hybratedTemplate);
-  //     });
-  //   case "sortByPrice":
-  //     const sorted_by_price = list.sort(
-  //       (a, b) => { let nameA = a.ListPrice;
-  //                   let nameB = b.ListPrice;
-  //                 if (nameA < nameB) return -1;
-  //                 else if(nameA > nameB) return 1;
-  //                 else return 0;})
-  //     sorted_by_price.forEach((product) => {
-  //       let clone = template.content.cloneNode(true);
-  //       let hybratedTemplate = hydrateFunction(clone, product);
-  //       ul.appendChild(hybratedTemplate);
-  //     });
-  // }
-  // }
-
 export function updateCartNumber() {
   const items = getLocalStorage("so-cart");
   let quantity = 0;
