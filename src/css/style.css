@@ -141,8 +141,59 @@ button {
   margin: auto;
 }
 .newsletter{
+position: absolute;
+top:0;
+bottom: 0;
+left: 0;
+right:0;
+transition: 2s;
+opacity: 0;
+display: block;
 border: solid #303030 ;
-margin-left:;
+border-radius: 7px 7px 7px 7px;
+padding: 10px;
+margin: auto;
+background-color: rgba(0,0,0,0.5);
+}
+
+.newsletter-after{
+  opacity: 1;
+  display: block;
+
+}
+
+
+.newsletter .button{
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 5px;
+  width: 40%;
+}
+.newsletter form{
+  position: relative;
+  background-color: white;
+  border-radius: 7px 7px 7px 7px;
+  box-shadow: 6px 6px 6px 6px rgba(0,0,0,0.3);
+  max-width: 40%;
+  text-align: center;
+  padding: 10px;
+  margin: 25% auto;
+
+}
+
+.form_X{
+  position:absolute ;
+  text-align: center;
+  top: 2px;
+  right: 5px;
+  height: 34px;
+  padding: 10px;
+}
+
+.newsletter .eminput{
+  margin: 6px;
+  padding: 4px;
+  height: 34px;
 }
 
 .products {

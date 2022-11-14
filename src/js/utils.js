@@ -91,3 +91,16 @@ export async function loadHeaderFooter() {
   renderwithTemplate(head, header);
   renderwithTemplate(foot, footer);
 }
+
+export function newsletter(){
+  //window.onload = function() {
+    setTimeout(function() {
+        document.querySelector('.newsletter').classList.add("newsletter-after");
+        //.style.display = 'block';
+    }, 1000);
+
+    document.querySelector('.form_X').addEventListener("click", ()=>{
+      document.querySelector('.newsletter').classList.remove("newsletter-after")
+    })
+  //}
+}
