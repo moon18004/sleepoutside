@@ -336,6 +336,22 @@ button {
   padding: 4px;
   font-size: 14px;
 }
+
+/* login */
+.login-form {
+  display: flex;
+  width: 600px;
+  margin: 0 auto;
+  flex-direction: column;
+}
+.login-form div {
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.login-form button {
+  margin-top: 10px;
+}
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
