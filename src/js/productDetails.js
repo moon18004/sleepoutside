@@ -78,9 +78,16 @@ export default class ProductDetails {
         <div class="product-detail__add">
           <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
         </div>`;
+    
+    // If there is multiple images, create a carousel.
+    if (this.product.Images.ExtraImages.length > 0) {
+      console.log("There is more here")
+    }
+    
 
     // If there is a dicount, add it to the page.
     if (this.product.SuggestedRetailPrice > this.product.ListPrice) {
+      
       // Percentage Discount
       this.percentOff = Math.round(
         (100 * (this.product.SuggestedRetailPrice - this.product.ListPrice)) /
